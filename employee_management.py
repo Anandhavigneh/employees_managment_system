@@ -21,8 +21,39 @@ def view_employee():
     else:
         print("No employees added yet!")
 
-    
-  
+#update employee
+
+def update_employee(emp_id,name=None,age=None,salary=None,department=None):
+    try:
+        if emp_id in empolyees:
+            if name:
+                empolyees[emp_id]['name'] = name
+            if age:
+                empolyees[emp_id]['age'] = age
+            if salary:
+                empolyees[emp_id]['salary'] = salary
+            if department:  
+                empolyees[emp_id]['department'] = department
+            print(f"\nEmployee {emp_id} updated successfully!")
+
+        else:
+            print(f"error with id{emp_id} not found")
+        
+    except KeyError as e:
+        print(F'error updating employee details: {e}')  
+
+#delete employee
+def remove_employee(emp_id):
+    try:
+        emp=empolyees.pop(emp_id)
+        print(f"\nEmployee {emp['name']} removed successfully!")
+        
+    except KeyError :
+        print(f"error with id{emp_id} not found")
+   
+
+
+
 
 
 # main menu function
@@ -46,7 +77,7 @@ def menu():
         choice=input("enter you choice: ")
 
         if choice =="1":
-            emp_id=input("enter the empolyee id: ")
+            emp_id=input("\n enter the empolyee id: ")
             name=input( "\n enter the empolyee name:  ")
             age=input( "\n enter the empolyee age:  ")
             salary=input( "\n enter the empolyee salary: ")
@@ -57,10 +88,19 @@ def menu():
             view_employee()
 
         elif choice == '3':
-            pass
+            emp_id=input("\n enter the new empolyee id: ")
+            name=input( "\n enter the new empolyee name:  ") or None
+            age=input( "\n enter the  new empolyee age:  ")  or None
+            salary=input( "\n enter the new empolyee salary: ")  or None
+            department=input( "\n enter the new empolyee department: ")  or None
+
+            
+            update_employee(emp_id,name,age,salary,department)
 
         elif choice == '4':
-            pass
+            emp_id=input("\n enter the empolyee id to delete: ")
+
+            remove_employee(emp_id)
 
         elif choice == '5':
             pass
