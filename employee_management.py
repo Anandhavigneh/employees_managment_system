@@ -50,7 +50,21 @@ def remove_employee(emp_id):
         
     except KeyError :
         print(f"error with id{emp_id} not found")
-   
+
+# save to file
+def save_to_file(filename):
+    try:
+        with open(filename,'w') as file:
+
+            for emp_id,deails in empolyees.items():
+                
+                line=f"{emp_id}:-> {deails['name']},{deails['age']},{deails['salary']},{deails['department']}\n"
+                file.write(line)
+        print(f"\nEmployee data saved to {filename} successfully!")
+
+    except Exception as e:
+        print(f"error saving to file: {e}")
+
 
 
 
@@ -103,7 +117,8 @@ def menu():
             remove_employee(emp_id)
 
         elif choice == '5':
-            pass
+            filename= input('\nenter filename to save :')
+            save_to_file(filename)
 
         elif choice == '6':
             pass
