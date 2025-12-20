@@ -65,6 +65,37 @@ def save_to_file(filename):
     except Exception as e:
         print(f"error saving to file: {e}")
 
+#fun to load data from json
+def load_from_file(filename):
+    try:
+        with open(filename,"r") as file:
+            global empolyees
+
+            empolyees={}
+
+
+            for line in file:
+                emp_data=line.strip().split('.')
+                emp_id,name,age,salary,department=emp_data
+
+                empolyees[emp_id]={
+                    "name":name,
+                    "age":age,
+                    "salary":salary,
+                    "department":department
+
+                }
+
+                print("Employees data loaded successfully..!")
+
+
+    except FileNotFoundError:
+        print(f"file {filename} not found")
+
+    except Exception as e:
+        print(f"error:  {e}")
+
+
 
 
 
@@ -121,10 +152,11 @@ def menu():
             save_to_file(filename)
 
         elif choice == '6':
-            pass
+            fliename=input("enter filename ")
+            load_from_file()
 
         elif choice == '7':
-            pass
+            exit("thank you")
 
 if __name__ == "__main__":
     menu()
